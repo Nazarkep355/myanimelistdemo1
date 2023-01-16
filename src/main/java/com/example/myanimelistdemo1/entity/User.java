@@ -1,11 +1,8 @@
 package com.example.myanimelistdemo1.entity;
 
 import com.example.myanimelistdemo1.entity.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -15,7 +12,10 @@ import java.util.Map;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document
+@ToString
+//@Document
+@Entity
+@Table(name = "users")
 public class User {
     @Id
     private Long id;
@@ -23,8 +23,11 @@ public class User {
     private String email;
     private String password;
     private Role role;
+    @ElementCollection
     private Map<Title,Double> ratingList;
+    @ManyToMany
     private List<Title> watchList;
+
 
 
 }
